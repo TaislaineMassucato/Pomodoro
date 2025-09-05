@@ -4,29 +4,45 @@ const curtoBt = document.querySelector('.app__card-button--curto');
 const longoBt = document.querySelector('.app__card-button--longo');
 const banner = document.querySelector('.app__image');
 const titulo = document.querySelector('.app__title');
+const botoes = document.querySelectorAll(".app__card-button");
+const musicaFocoInput = document.querySelector("#alternar-musica");
+const musica = new Audio("sons/luna-rise-part-one.mp3");
+musica.loop;
+
+
+musicaFocoInput.addEventListener("change", () => {
+    if(musica.paused){
+        musica.play()
+    }else{
+        musica.pause()
+    }
+})
 
 focoBt.addEventListener('click', () => {
-
     mudarContexto('foco');
+    focoBt.classList.add('active');
     // html.setAttribute('data-contexto', 'foco');
     // banner.setAttribute('src' ,'/imagens/foco.png');
 });
 
 curtoBt.addEventListener('click', () => {
-
     mudarContexto('descanso-curto');
+    curtoBt.classList.add('active');
     // html.setAttribute('data-contexto', 'descanso-curto');
     // banner.setAttribute('src' ,'/imagens/descanso-curto.png');
 });
 
 longoBt.addEventListener('click', () => {
-
     mudarContexto('descanso-longo');
+    longoBt.classList.add("active");
     // html.setAttribute('data-contexto', 'descanso-longo');
     // banner.setAttribute('src' ,'/imagens/descanso-longo.png');
 });
 
 function mudarContexto(contexto) {
+    botoes.forEach(function(contexto){
+        contexto.classList.remove("active")
+    });
     html.setAttribute('data-contexto', contexto);
     banner.setAttribute('src', `/imagens/${contexto}.png`);
     switch (contexto) {
